@@ -2,7 +2,7 @@
  * @Author: wangyiheng 
  * @Date: 2017-10-10 09:09:09 
  * @Last Modified by: wangyiheng
- * @Last Modified time: 2017-10-18 15:57:26
+ * @Last Modified time: 2017-10-23 10:18:37
  * alertbox为项目封装的一个弹窗，util.js为一些工具方法
  */
 import Vue from 'vue'
@@ -58,20 +58,43 @@ var vm = new Vue({
             this.verticalWidth = screen.width*this.dpr;
             this.crossWidth = screen.height*this.dpr;
             this.verticalHeight = this.verticalWidth * 380 / 750;                
-            this.crossHeight = this.verticalWidth * 0.6;
-            this.height = this.getWarnHeight();
-            this.resize(this.verticalWidth, this.verticalHeight);
         }
         else {
             this.crossWidth = screen.width*this.dpr;
             this.verticalWidth = screen.height*this.dpr;                
             this.crossHeight = this.verticalWidth * 0.6;
-            this.verticalHeight = this.verticalWidth * 380 / 750;
-            this.resize(this.crossWidth, this.crossHeight);
-            this.height = this.getBtnAreaHeight();
         }
-        // 注册横竖屏事件
-        window.onorientationchange = this.orientationChange;
+        var isOrientation = ('orientation' in window && 'onorientationchange' in window);
+        if (isOrientation) {
+            // 注册横竖屏事件,方案1;
+            window.onorientationchange = this.orientationChange;
+            this.orientationChange();            
+        }
+        else {
+            // 使用 resize 来做监听机制。方案2：
+            window.addEventListener('resize',function(e){
+                var orientation=(window.innerWidth > window.innerHeight)? "landscape":"portrait"; // 判断横竖屏
+                if(orientation === 'portrait'){
+                    // 竖屏 do something ……
+                    that.screenCtrl = true;
+                    setTimeout(function(){
+                        that.height = that.getWarnHeight();                
+                    },500)
+                    that.resizeCanvas(that.verticalWidth, that.verticalHeight, true);
+                    return;
+                } 
+                else {
+                    // 横屏 do something else ……
+                    that.screenCtrl = false;
+                    setTimeout(function(){
+                        that.height = that.getBtnAreaHeight();
+                        that.crossHeight = window.innerHeight - that.height;
+                        that.resizeCanvas(that.crossWidth, that.crossHeight, false);              
+                    },500)
+                    that.resizeCanvas(that.crossWidth, that.crossHeight, false);  
+                }
+            },false)
+        }
     },
     methods: {
         clearCanvas: function (e) {
@@ -174,7 +197,7 @@ var vm = new Vue({
          * @param {*} h 画布高
          * @param {*} flag 横竖屏标志
          */  
-        resize(w, h, flag) {
+        resizeCanvas(w, h, flag) {
             var that = this;
             var nc = document.createElement("canvas");
             nc.width = that.canvas.width;
@@ -201,28 +224,30 @@ var vm = new Vue({
                 case 0:
                     var that = this; 
                     this.screenCtrl = true;
-                    setTimeout(function(){
+                    setTimeout(function(){             
                         that.height = that.getWarnHeight();                
-                    },500)
-                    this.resize(that.verticalWidth, that.verticalHeight, true);
+                    },300)
+                    this.resizeCanvas(that.verticalWidth, that.verticalHeight, true);
                     break;
         
-                case -90:
-                    var that = this;             
+                case -90:                
+                    var that = this;        
                     this.screenCtrl = false;
-                    setTimeout(function(){
-                        that.height = that.getBtnAreaHeight();                
-                    },500)
-                    this.resize(that.crossWidth, that.crossHeight, false);            
+                    setTimeout(function(){               
+                        that.height = that.getBtnAreaHeight();
+                        that.crossHeight = window.innerHeight - that.height;
+                        that.resizeCanvas(that.crossWidth, that.crossHeight, false);                                    
+                    },300)
                     break;
         
                 case 90:
                     var that = this;                 
                     this.screenCtrl = false;
                     setTimeout(function(){
-                        that.height = that.getBtnAreaHeight();                
-                    },500)
-                    this.resize(that.crossWidth, that.crossHeight, false);            
+                        that.height = that.getBtnAreaHeight();
+                        that.crossHeight = window.innerHeight - that.height;
+                        that.resizeCanvas(that.crossWidth, that.crossHeight, false);
+                    },300)          
                     break;
         
                 case 180:
@@ -230,8 +255,8 @@ var vm = new Vue({
                     this.screenCtrl = true;
                     setTimeout(function(){
                         that.height = that.getWarnHeight();                
-                    },500)
-                    this.resize(that.verticalWidth, that.verticalHeight, true);
+                    },300)
+                    this.resizeCanvas(that.verticalWidth, that.verticalHeight, true);
                     break;
             };
         },
