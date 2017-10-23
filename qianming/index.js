@@ -3,6 +3,7 @@
  * @Date: 2017-10-10 09:09:09 
  * @Last Modified by: wangyiheng
  * @Last Modified time: 2017-10-18 15:57:26
+ * alertbox为项目封装的一个弹窗，util.js为一些工具方法
  */
 import Vue from 'vue'
 import alertBox from '../../components/alertbox/alertbox.vue'
@@ -126,23 +127,7 @@ var vm = new Vue({
             if (contract) {
                 var info = JSON.parse(contract);
                 var data = {
-                    "id": info.id,
-                    "name": info.name,
-                    "phone": info.phone,
-                    "address": info.address,
-                    "zipcode": info.zipcode,
-                    "faxno": info.faxno,
-                    "email": info.email,
-                    "signPlace": info.signPlace,
-                    "loanAmount": info.loanAmount,
-                    "loanTerms": info.loanTerms,
-                    "loanRate": info.loanRate,
-                    "loanStartTime": info.loanStartTime,
-                    "loanEndTime": info.loanEndTime,
-                    "bankName": info.bankName,
-                    "bankCardNo": info.bankCardNo,
-                    "bankAccountName": info.bankAccountName,
-                    "signData": that.signData,
+                    // some data;
                 }
             }
             else {
@@ -169,9 +154,7 @@ var vm = new Vue({
                             isShow: true,
                             toast: true
                         } 
-                        setTimeout(function () {
-                            location.replace('./list.html')
-                        }, 3000);
+                        // ....
                     }
                     else {
                         that.alertConfig = {
