@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽div块的实现</title>
+    <style>
+        .tz-wrapper {
+            margin: 0;
+            padding: 0;
+            border: 1px solid #333333;
+            width:400px;
+            height:400px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .tz-head {
+            width: 100%;
+            height: 50px;
+            background: #b0b0b0;
+            border-radius: 10px 10px 0 0;
+            cursor: move;
+        }
+
+        .tz-head h4 {
+            margin: 0;
+            padding: 0;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .tz-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="tz-wrapper" id="wrap">
+        <div class="tz-head" id="tzHead">
+            <h4>我是标题我是标题</h4>
+        </div>
+        <div class="tz-body">
+            <h3>我是拖拽我是拖拽</h3>
+        </div>
+    </div>
+
+    <script>
+        var flag = false;
+        var wrap = document.getElementById('wrap')
+        var head = document.getElementById('tzHead');
+
+        var now = {
+            x:'',
+            y:''
+        };
+
+        var last = {
+            x:'',
+            y:''
+        };
+
+        var initPosition = {
+            x:'',
+            y:''
+        };
+
+        head.addEventListener('mousedown',beginDrag,false);
+
+        document.addEventListener('mousemove',drag,false);
+
+        document.addEventListener('mouseup',endDrag,false);
+
+        function beginDrag(e) {
+            flag = true;
+            last.x = e.pageX;
+            last.y = e.pageY;
+            initPosition = {
+                x: wrap.offsetLeft,
+                y: wrap.offsetTop
+            };
+        }
+
+        function drag(e) {
+            if (flag) {
+                now = {
+                    x: e.pageX,
+                    y: e.pageY
+                };
+                wrap.style.left = parseInt(now.x) - parseInt(last.x) + parseInt(initPosition.x) + 'px';
+                wrap.style.top = parseInt(now.y) - parseInt(last.y) + parseInt(initPosition.y) + 'px';
+                return false;
+            }
+        }
+
+        function endDrag(e) {
+            flag = false;
+        }
+    </script>
+</body>
+</html>

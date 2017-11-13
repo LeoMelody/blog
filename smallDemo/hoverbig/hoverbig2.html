@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HoverBig</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .img {
+            filter: grayscale(100%);
+            transition: transform .5s;
+        }
+
+        .item:hover .img {
+            filter: grayscale(0);
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body>
+<!--demo1 使用CSS3的transition属性和transform属性来完成该动画-->
+<div class="container">
+    <div class="item">
+        <div class="img-item">
+            <img src="img/hp-use22.png" alt="img" class="img">
+        </div>
+        <div class="text-item">
+            介绍上门服务通用LBS解决方案，帮助O2O开发者快速清晰地构建系统。
+        </div>
+    </div>
+</div>
+</body>
+</html>

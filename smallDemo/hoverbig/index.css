@@ -1,0 +1,35 @@
+/**
+ * @author wangyiheng 
+ * Create Time : 2017-11-13-09-12
+ * Description :   hoverBig style
+ */
+
+/*
+    基础样式代码部分
+*/
+.container {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.item {
+    width: 290px;
+    cursor: pointer;
+}
+.img-item {
+    width: 290px;
+    height: 215px;
+    overflow: hidden;
+    position: relative;
+}
+.img-item img {
+    width: 290px;
+    position: absolute;
+    z-index: 1;
+}
+.text-item {
+    padding: 10px 0;
+}
+
