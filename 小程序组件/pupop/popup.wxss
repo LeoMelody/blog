@@ -1,0 +1,121 @@
+/* components/popup/popup.wxss */
+/* 蒙层 */
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+/* 弹框 */
+.modal-dialog{
+  font-size: 30rpx;
+  width:560rpx;
+  height:454rpx;
+  position: fixed;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+  z-index: 1500;
+  background: #fff;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.m-title {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  align-self: stretch;
+  font-size: 36rpx;
+}
+
+.m-info{
+  padding-top: 30rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #888;
+  flex: 1;
+}
+
+.m-avatur{
+  width:120rpx;
+  height: 120rpx;
+  border: 1rpx solid #eee;
+  border-radius: 50%;
+}
+
+.m-name{
+  margin-top: 10rpx;
+  font-size: 30rpx;
+}
+
+.m-star{
+  display: flex;
+  width: 190rpx;
+  margin: 20rpx auto 0;
+}
+
+.m-phone{
+  margin-top:30rpx;
+  font-size: 30rpx;
+  color: #888888;
+}
+
+.modal-footer{
+  display: flex;
+  height: 100rpx;
+  border-top: 1rpx solid #E5E5E5;
+  margin-top: 30rpx;
+}
+
+.btn-footer{
+  width: 280rpx;
+  font-size: 36rpx;
+  color: #02BB00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-l-footer{
+  border-right: 1rpx solid #E5E5E5;
+}
+
+.stars-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.star-icon {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+.little-star {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+
+.star-icon:last-child {
+  margin-right: 0;
+}
+
+.m-no-grade {
+  text-align: center;
+  color: #888888;
+  margin-top:10rpx;
+}

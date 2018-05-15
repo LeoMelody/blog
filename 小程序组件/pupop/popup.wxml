@@ -1,0 +1,30 @@
+<!--components/popup/popup.wxml-->
+<block wx:if="{{showModal}}">
+  <view class="modal-mask" catchtouchmove="preventTouchMove"></view>
+  <view class="modal-dialog" catchtouchmove="preventTouchMove">
+    <view class='m-title'>
+      {{title}}
+    </view>
+    <view class="m-info">
+      {{content}}
+      <!-- <image class="m-avatur" src="{{manager.headImgUrl}}"></image>
+      <view class="m-name">{{manager.name}}</view>
+      <view class="m-star" wx:if="{{hasGrade}}">
+        <image wx:for="{{stars}}" wx:key="{{item}}" class="star-icon little-star" src="{{item==0.5?halfStar:(item>0?selectedStar:noStar)}}"></image>
+      </view>
+      <view class='m-no-grade' wx:else>
+        暂无评分
+      </view>
+      <view class="m-phone">{{manager.mobileNo}}</view> -->
+    </view>
+    <view class="modal-footer">
+      <view class="btn-footer btn-l-footer" bindtap="_onCancel">
+        <text>{{cancelText}}</text>
+      </view>
+      <view class="btn-footer btn-r-footer" bindtap="_onConfirm">
+        <text>{{confirmText}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+
