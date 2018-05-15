@@ -1,0 +1,63 @@
+/**
+ * @author wangyiheng 
+ * Create Time : 2017-11-29-17-17
+ * Description :   
+ */
+body {
+    background: #d4af9e;
+}
+
+.header {
+    text-align: center;
+}
+
+.timer {
+    position: absolute;
+    top: 500px;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background: red;
+    color: #fff;
+    font-size: 24px;
+}
+
+.over {
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+    line-height: 100px;
+    text-align: center;
+    background: #333333;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+    color: #fff;
+    font-size: 32px;
+    transition: all .3s;
+    display: none;
+    opacity: .5;
+}
+
+.span {
+    display: inline-block;
+    border: 1px solid #333;
+}
+
+#game {
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+    border: 5px solid #d3d3d3;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    cursor: pointer;
+    background: #333;
+}
