@@ -16,12 +16,10 @@
 .modal-dialog{
   font-size: 30rpx;
   width:560rpx;
-  height:454rpx;
   position: fixed;
-  top:0;
+  top: 30%;
   left:0;
   right: 0;
-  bottom: 0;
   margin:auto;
   z-index: 1500;
   background: #fff;
@@ -118,4 +116,10 @@
   text-align: center;
   color: #888888;
   margin-top:10rpx;
+}
+
+.m-i-img {
+  width: 240rpx;
+  height: 240rpx;
+  margin: 0;
 }
