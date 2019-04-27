@@ -68,6 +68,7 @@ $border: 1px solid #e5e5e5;
           font-size: 16px;
           outline: none;
           margin: 0;
+          border: none;
           text-align: right;
           &:active {
             outline: none;
