@@ -2,37 +2,37 @@
  * @Author: leo 
  * @Date: 2019-06-30 10:27:45 
  * @Last Modified by: leo
- * @Last Modified time: 2019-06-30 13:14:50
+ * @Last Modified time: 2019-06-30 17:10:27
  * 手写一个call 方法
  */
-
- // call 是干嘛的就不说了
-var name = 'cc' 
-var obj = {name: 'wyh'}
-
 function sayName(p) {
   console.log(this.name)
   console.log(p)
   return `${p}${this.name}`
 }
 
-sayName('xxx') // 请运行在浏览器环境 cc  xxx
-sayName.call(obj, 'xx2') // wyh xx2
-
-// self call * call 方法接收的是一个一个的参数
-// ES6版，简易
+// ES6版，比较简单
 Function.prototype.selfCall = function(ctx, ...args) {
+  if (typeof this !== 'function') {
+    throw new Error('you must use call with function')
+  }
+   // ctx = ctx || window || global // 这个写法是为了在NodeJS中运行，不过这个并非这个问题的关键
   ctx = ctx || window
-  // 强绑定上ctx为执行上下文
+  // 强绑定上ctx为执行上下文，这里为了为了防止方法名称冲突，我定义这个方法名称为_fn，不过这个并不是这个问题的关键考察点
   ctx._fn = this
   const res = ctx._fn(...args)
+  // 一定要删除这个熟悉，不然可能会影响外部的对象正常运行
   delete ctx._fn
+  // 返回值也要注意
   return res
 }
 
 
 // ES5版
 Function.prototype.es5call = function(ctx) {
+  if (typeof this !== 'function') {
+    throw new Error('you must use call with function')
+  }
   ctx = ctx || window
   var args = []
   // 收集参数
@@ -47,5 +47,29 @@ Function.prototype.es5call = function(ctx) {
   return res
 }
 
-console.log(sayName.selfCall(obj, 'xxx')) // pass
-console.log(sayName.es5call(obj, 'xxx'))
+// 错误示范
+Function.prototype.callError = function(ctx) {
+  ctx = ctx || window
+  ctx._fn = this
+  var newArr = [];
+  for(var i=1; i<args.length; i++) {
+    newArr.push(args[i]);
+  }
+  // 因为这里newArr.join(',') 返回的是一个字符串，也就是不管这个call方法传入几个参数，真正执行的就只会有一个参数了
+  var res = ctx._fn(newArr.join(','));
+  delete ctx._fn;
+  return res
+}
+
+var obj = {name: 'wyh'}
+
+// console.log(sayName.call(obj, 'xxx'))
+// console.log(sayName.selfCall(obj, 'xxx')) 
+// console.log(sayName.es5call(obj, 'xxx')) 
+
+function say() {
+  console.log(arguments)
+}
+
+say.es5call({}, 1,2,3,4) // 0: 1, 1: 2, 2: 3, 3: 4
+say.call2({}, 1,2,3,4) // 0: 1,2,3,4
