@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .wrap {
+      /* 构成BFC防止塌陷 */
+      /* display: inline-block; */
+      overflow: hidden;
+      background: red;
+      color: aliceblue;
+    }
+
+    .float {
+      float: left;
+      width: 50px;
+      height: 100px;
+    }
+
+    .float1 {
+      background: black;
+    }
+
+    .float2 {
+      background: green;
+      left: 100px;
+    }
+
+    .text {
+      overflow: hidden;
+    }
+
+    /* .text::after {
+      content: "";
+      display: table;
+      clear: both;
+    } */
+  </style>
+</head>
+<body>
+  <!-- <div class="float1 float"></div> -->
+  <div class="wrap">
+    <div class="float2 float">假装自己是个图片</div>
+    <div class="text">我是一段很长很长的文字我是一段很长很长的文字我是一段很长很长的文字</div>
+  </div>
+</body>
+</html>

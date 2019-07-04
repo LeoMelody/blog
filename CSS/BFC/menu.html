@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 100vh;
+    }
+    .menu {
+      width: 200px;
+      float: left;
+      background: rgb(0, 255, 221);
+      height: 100%;
+      animation: changeW 3s infinite alternate;
+    }
+
+    @keyframes changeW {
+      0% {
+        width: 200px
+      }
+
+      100% {
+        width: 500px;
+      }
+    }
+
+    .content {
+      overflow: hidden;
+      height: 100%;
+      background: rgb(238, 115, 8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="menu">我是菜单</div>
+    <div class="content">我是内容</div>
+  </div>
+</body>
+</html>
