@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 首先你要理解为什么要用作用域插槽，作用域插槽可以帮助开发者在插槽中拿到组件中定义的值 -->
+  <div id="app">
+    <my-table :data="list">
+      <!-- 作用域插槽自定义区域 -->
+      <template slot-scope="scope">
+        <div @click="testFunc(scope)">点击</div>
+      </template>
+    </my-table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component("my-table", {
+      template: `
+        <div>
+          <div v-for="item in data">
+            <!-- 作用域插槽定义 -->
+            <!-- 这里将item绑定到slot上，就可以在外部做插槽时拿到item的值 -->            
+            <!-- <slot :item="item"></slot> --> 
+            <!-- 模拟ele的写法 -->            
+            <slot :row="item"></slot>
+          </div>
+        </div>
+      `,
+      props: {
+        data: {
+          type: Array,
+          default: () => []
+        }
+      }
+    })
+
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        list: [
+          {
+            label: "123"
+          },
+          {
+            label: '456'
+          }
+        ]
+      },
+      methods: {
+        testFunc(scope) {
+          console.log(scope.row.label) // 123 或者 456
+        }
+      }
+    })
+  </script>
+</body>
+</html>
