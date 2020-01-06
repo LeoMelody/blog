@@ -17,7 +17,7 @@ function New(fn) {
     newObj.__proto__ = fn.prototype
   }
   // 提取
-  let res = fn.call(newObj, Array.prototype.slice.call(arguments, 1))
+  let res = fn.apply(newObj, Array.prototype.slice.call(arguments, 1))
   if (res !== null && (typeof res === 'object' || typeof res === 'function')) {
     return res
   }
